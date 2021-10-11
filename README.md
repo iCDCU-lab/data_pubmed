@@ -34,9 +34,15 @@ You still might need to install mysql-connector separately, depending on whether
   <li>[Main]</li>
 
   <li>For one file: </li>
+  
 `python3 run.py [baseline / daily] xxxx`
+  
   <li>For a range of files:</li>
+  
 `python3 run.py [baseline / daily] range xxxx`
+  
   <li>For a selection of files:</li>
+  
 `python3 run.py [baseline / daily] xxxx xxxx xxxx …`
+  
  </ul>
