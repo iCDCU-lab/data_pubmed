@@ -46,3 +46,35 @@ You still might need to install mysql-connector separately, depending on whether
 `python3 run.py [baseline / daily] xxxx xxxx xxxx …`
   
  </ul>
+
+ <h3>INDEXING</h3>
+
+ To index the documents in the database for elasticsearch to use, we use Logstash. Logstash utilizes a configuration file of the format `.conf` to connect to the database and creates a mapping/index of all the documents. <br>
+ 
+ Use `logstash_full_index.conf` to index the database. The logstash executable file resides in the `/usr/share/logstash/bin/` directory. <br>
+
+ Things to keep in mind:
+ 
+ <ul>
+    <li> jdbc_user: this is the mysql database user. </li>
+    <li> jdbc_password: this is the password of the mysql database user. </li>
+    <li> statement: this is the mysql command which tells logstash to track the specified columns of the table in the database. </li>
+    <li> tracking_column: this is the primary key of the table. </li>
+    <li> index: this is the name of the index that will be created. </li>
+</ul>
+
+To run the configuration file:
+
+<ul>
+    <li>Running in the foreground of the current shell: </li>
+
+`/usr/share/logstash/bin/logstash -f logstash_full_index.conf`
+
+    <li>Running in the background: </li>
+
+`nohup /usr/share/logstash/bin/logstash -f logstash_full_index.conf &`
+
+</ul>
+
+To check existing logstash indices: `curl logstash:9200/_cat/indices`<br>
+To delete an existing logstash index: `curl -XDELETE 'localhost:9200/[index_name]'`<br>
