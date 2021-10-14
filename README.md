@@ -35,15 +35,15 @@ You still might need to install mysql-connector separately, depending on whether
 
   <li>For one file: </li>
   
-`python3 run.py [baseline / daily] xxxx`
+    python3 run.py [baseline / daily] xxxx
   
   <li>For a range of files:</li>
   
-`python3 run.py [baseline / daily] range xxxx`
+    python3 run.py [baseline / daily] range xxxx
   
   <li>For a selection of files:</li>
   
-`python3 run.py [baseline / daily] xxxx xxxx xxxx …`
+    python3 run.py [baseline / daily] xxxx xxxx xxxx …
   
  </ul>
 
@@ -66,13 +66,13 @@ You still might need to install mysql-connector separately, depending on whether
 To run the configuration file:
 
 <ul>
-    <li>Running in the foreground of the current shell: </li>
+<li>Running in the foreground of the current shell: </li>
 
-    `/usr/share/logstash/bin/logstash -f logstash_full_index.conf`
+    /usr/share/logstash/bin/logstash -f logstash_full_index.conf
 
 <li>Running in the background: </li>
 
-    `nohup /usr/share/logstash/bin/logstash -f logstash_full_index.conf &`
+    nohup /usr/share/logstash/bin/logstash -f logstash_full_index.conf &
 
 </ul>
 
