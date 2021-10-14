@@ -68,11 +68,11 @@ To run the configuration file:
 <ul>
     <li>Running in the foreground of the current shell: </li>
 
-`/usr/share/logstash/bin/logstash -f logstash_full_index.conf`
+    `/usr/share/logstash/bin/logstash -f logstash_full_index.conf`
 
-    <li>Running in the background: </li>
+<li>Running in the background: </li>
 
-`nohup /usr/share/logstash/bin/logstash -f logstash_full_index.conf &`
+    `nohup /usr/share/logstash/bin/logstash -f logstash_full_index.conf &`
 
 </ul>
 
