@@ -5,9 +5,7 @@ import gzip
 import glob
 import shutil
 from file_parser_new import folder_select
-
-LOGFILE_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/logs.txt'
-FILE_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/'
+import constants
 
 args = sys.argv
 
@@ -33,7 +31,7 @@ elif args[1] == 'daily':
     # unzip .gz files
     search_path = os.getcwd()
     file_type = ".gz"
-    for fname in os.listdir(path=FILE_PATH+'pubmed/updatefiles/'):
+    for fname in os.listdir(path=constants.SRC_PATH+'updatefiles/'):
         print(fname)
         if fname.endswith(file_type):
             with gzip.open(fname,'rb') as f_in:

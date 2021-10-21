@@ -4,14 +4,12 @@ import datetime
 import os
 import glob
 import sqlite3
-
-LOGFILE_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/logs.txt'
-FILE_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/pubmed/'
+import constants
 
 mydb = mysql.connector.connect(
-    host = "localhost",
-    user = "pubmed",
-    passwd = "Dummy@123",
+    host = constants.DB_HOST,
+    user = constants.DB_USER,
+    passwd = constants.DB_PASSWD,
     database = "test_transfer",
     auth_plugin = "mysql_native_password"
 )
@@ -21,7 +19,7 @@ mycursor = mydb.cursor(buffered=True)
 def folder_select(folder):
     if folder == 'baseline':
         BASE_DIR_NAME = 'baseline/pubmed21n'
-        base_files = glob.glob(FILE_PATH+BASE_DIR_NAME+'*.xml')
+        base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+'*.xml')
         print(sorted(base_files))
         mycursor.execute('TRUNCATE TABLE src_2020')
         file_parser(sorted(base_files))
@@ -29,7 +27,7 @@ def folder_select(folder):
     elif folder == 'daily':
         print('in daily')
         DAILY_DIR_NAME = 'updatefiles/pubmed21n'
-        daily_files = glob.glob(FILE_PATH+DAILY_DIR_NAME+'*.xml')
+        daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+'*.xml')
         print(sorted(daily_files))
         file_parser(sorted(daily_files))
 
@@ -87,7 +85,7 @@ def delete_db(deleted_pmids):
     return deleted
 
 def file_parser(fil_exe):
-    log_file = open(LOGFILE_PATH, 'a')
+    log_file = open(constants.LOGFILE_PATH, 'a')
     updated = []
     deletes = []
     for filename in fil_exe:

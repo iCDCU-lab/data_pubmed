@@ -5,16 +5,17 @@ import ftplib
 import os
 import time
 import errno
+import constants
 
-FILE_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/pubmed/updatefiles/'
+FILE_PATH = constants.SRC_PATH + 'updatefiles/'
 
 def src_config(src, args):
-    server = "ftp.ncbi.nlm.nih.gov"
-    user = "anonymous"
-    password = "anonymous"
+    server = constants.PBM_SERVER
+    user = constants.PBM_USER
+    password = constants.PBM_PASSWD
     source = src
-    destination = "/home/sahupr@ad.uc.edu/pubmed_docs/"
-    interval = 0.1
+    destination = constants.FILE_DST
+    interval = constants.INTERVAL
 
     ftp = ftplib.FTP(server)
     ftp.login(user, password)
