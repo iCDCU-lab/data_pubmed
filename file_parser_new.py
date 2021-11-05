@@ -21,7 +21,7 @@ def folder_select(folder):
         BASE_DIR_NAME = 'baseline/pubmed21n'
         base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+'*.xml')
         print(sorted(base_files))
-        mycursor.execute('TRUNCATE TABLE src_2020')
+        mycursor.execute('TRUNCATE TABLE {}'.format(constants.TABLE))
         file_parser(sorted(base_files))
 
     elif folder == 'daily':
@@ -47,8 +47,8 @@ def update_db(pmid, pmcid, pub_type, pub_date, pubmed_pub_date, title, abstract,
 #     print('-> mesh_terms_major_n:', mesh_terms_major_n)
 #     print()
     # print('Updating {}'.format(pmid))
-    insert_sql = 'INSERT INTO src_2020 (PMID) VALUES (%s)'
-    update_sql = 'UPDATE src_2020 SET\
+    insert_sql = 'INSERT INTO {} (PMID) VALUES (%s)'.format(constants.TABLE)
+    update_sql = 'UPDATE {} SET\
                       PMCID = %s,\
                       PUB_TYPE = %s,\
                       PUB_DATE = %s,\
@@ -58,7 +58,7 @@ def update_db(pmid, pmcid, pub_type, pub_date, pubmed_pub_date, title, abstract,
                       CHEMICAL_TERMS = %s,\
                       MESH_TERMS_MAJOR_Y = %s,\
                       MESH_TERMS_MAJOR_N = %s\
-                  WHERE PMID = %s'
+                  WHERE PMID = %s'.format(constants.TABLE)
     try:
         mycursor.execute(insert_sql, (pmid,))
     except Exception as e:
@@ -73,7 +73,7 @@ def update_db(pmid, pmcid, pub_type, pub_date, pubmed_pub_date, title, abstract,
 
 def delete_db(deleted_pmids):
 #     print('-> deleted_pmids:', deleted_pmids)
-    delete_sql = 'DELETE FROM src_2020 WHERE PMID = %s'
+    delete_sql = 'DELETE FROM {} WHERE PMID = %s'.format(constants.TABLE)
     for pmid in deleted_pmids:
         print('Deleting {}'.format(pmid))
         try:

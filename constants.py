@@ -1,6 +1,7 @@
 DB_HOST = 'localhost'
 DB_USER = 'pubmed'
 DB_PASSWD = 'Dummy@123'
+TABLE = 'src_2020'
 
 SRC_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/pubmed/'
 
