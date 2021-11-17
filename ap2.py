@@ -43,7 +43,6 @@ def downloadFiles(path, destination, interval, ftp, args):
     elif len(args)>2 and args[2] == 'range':
         ffile = 'pubmed21n'+str(args[3])+'.xml.gz'
         lfile = 'pubmed21n'+str(args[4])+'.xml.gz'
-        print(ffile, lfile)
         for f in filelist:
             if f>=ffile and f<=lfile and f[-3:]=='.gz' and os.path.exists(FILE_PATH+f[0:-3]) == False:
                     print('file {} not found, downloading.'.format(f))
