@@ -24,7 +24,7 @@ elif args[1] == 'baseline':
                 with open(fname[0:-7]+'.xml','wb') as f_out:
                     shutil.copyfileobj(f_in,f_out)
                     os.remove(fname)
-    folder_select(args[1])
+    folder_select(args)
 
 elif args[1] == 'daily':        
     src_config('/pubmed/updatefiles/', args)
@@ -32,7 +32,6 @@ elif args[1] == 'daily':
     search_path = os.getcwd()
     file_type = ".gz"
     for fname in os.listdir(path=constants.SRC_PATH+'updatefiles/'):
-        print(fname)
         if fname.endswith(file_type):
             with gzip.open(fname,'rb') as f_in:
                 with open(fname[0:-7]+'.xml','wb') as f_out:
@@ -40,4 +39,4 @@ elif args[1] == 'daily':
                     os.remove(fname)
         else:
             continue
-    folder_select(args[1])
+    folder_select(args)

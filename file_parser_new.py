@@ -16,18 +16,42 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor(buffered=True)
 
-def folder_select(folder):
-    if folder == 'baseline':
+def folder_select(post_args):
+    if post_args[1] == 'baseline':
         BASE_DIR_NAME = 'baseline/pubmed21n'
-        base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+'*.xml')
+        #in case the arguments have a range of files
+        if post_args[2]=='range':
+            for file in range(post_args[3], post_args[4]+1):
+                base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+str(file)+'.xml')
+        #in case the argument is one file
+        elif len(post_args)==3:
+            base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+str(post_args[2])+'.xml')
+        #in case the argument has a series of discretely mentioned files
+        elif post_args[2]!='range' and len(post_args)>3:
+            for file in range(post_args[2], len(post_args)+1):
+                base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+str(file)+'.xml')
+        else:
+            base_files = glob.glob(constants.SRC_PATH+BASE_DIR_NAME+'*.xml')
         print(sorted(base_files))
         mycursor.execute('TRUNCATE TABLE {}'.format(constants.TABLE))
         file_parser(sorted(base_files))
 
-    elif folder == 'daily':
+    elif post_args[1] == 'daily':
         print('in daily')
         DAILY_DIR_NAME = 'updatefiles/pubmed21n'
-        daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+'*.xml')
+        #in case the arguments have a range of files
+        if post_args[2]=='range':
+            for file in range(post_args[3], post_args[4]+1):
+                daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+str(file)+'.xml')
+        #in case the argument is one file
+        elif len(post_args)==3:
+            daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+str(post_args[2])+'.xml')
+        #in case the argument has a series of discretely mentioned files
+        elif post_args[2]!='range' and len(post_args)>3:
+            for file in range(post_args[2], len(post_args)+1):
+                daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+str(file)+'.xml')
+        else:
+            daily_files = glob.glob(constants.SRC_PATH+DAILY_DIR_NAME+'*.xml')
         print(sorted(daily_files))
         file_parser(sorted(daily_files))
 

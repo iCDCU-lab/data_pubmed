@@ -36,6 +36,8 @@ def downloadFiles(path, destination, interval, ftp, args):
     
     filelist=ftp.nlst()
     files = []
+
+    #if the user wishes to download all the files from the file repository
     if len(args)==2:
         files = filelist
     elif len(args)>2 and args[2] == 'range':
@@ -44,7 +46,7 @@ def downloadFiles(path, destination, interval, ftp, args):
         print(ffile, lfile)
         for f in filelist:
             if f>=ffile and f<=lfile and f[-3:]=='.gz' and os.path.exists(FILE_PATH+f[0:-3]) == False:
-                    print('file not found')
+                    print('file {} not found, downloading.'.format(f))
                     files.append(f)
     else:
         for i in range(2, len(args)):
@@ -56,7 +58,6 @@ def downloadFiles(path, destination, interval, ftp, args):
             else:
                 continue
 
-    print(files)
     if len(files) != 0:
         for file in files:
             time.sleep(interval)
