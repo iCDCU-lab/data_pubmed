@@ -5,6 +5,8 @@ TABLE = 'src_2020'
 
 SRC_PATH = '/home/sahupr@ad.uc.edu/pubmed_docs/pubmed/'
 
+FILE_PREFIX = 'pubmed22n'
+
 PBM_SERVER = "ftp.ncbi.nlm.nih.gov"
 PBM_USER = "anonymous"
 PBM_PASSWD = "anonymous"

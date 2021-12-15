@@ -22,7 +22,7 @@ def folder_select(post_args):
     daily_files = []
 
     if post_args[1] == 'baseline':
-        BASE_DIR_NAME = 'baseline/pubmed21n'
+        BASE_DIR_NAME = 'baseline/'+constants.FILE_PREFIX
         #in case the arguments have a range of files
         if post_args[2]=='range':
             for file in range(int(post_args[3]), int(post_args[4])+1):
@@ -42,7 +42,7 @@ def folder_select(post_args):
 
     elif post_args[1] == 'daily':
         print('in daily')
-        DAILY_DIR_NAME = 'updatefiles/pubmed21n'
+        DAILY_DIR_NAME = 'updatefiles/'+constants.FILE_PREFIX
         #in case the arguments have a range of files
         if post_args[2]=='range':
             for file in range(int(post_args[3]), int(post_args[4])+1):
